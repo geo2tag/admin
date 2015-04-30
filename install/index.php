@@ -35,11 +35,11 @@
       </div>
       <div class="jumbotron">
         <h1>Welcome to UserFrosting!</h1>
-        <p class="lead">Upgrade Script</p>
-		<div class='alert alert-warning'>Before you begin, please make sure you have UserFrosting installed or this upgrade script will not work.</div>
+        <p class="lead">A secure, modern user management system based on UserCake, jQuery, and Bootstrap.</p>
+		<div class='alert alert-warning'>Before you begin, please create a new MySQL database.  Then, open the file <code>models/db-settings.php</code> and enter your database connection details (host, database name, username, password).  When this is complete, click the button below.</div>
 		<div id='display-alerts'>
 		</div>        
-		<a class="btn btn-primary" href='get_versions.php'>Start Upgrade</a>
+		<a class="btn btn-primary" href='wizard_site_config.php'>Start Installation</a>
 	  </div>
       <div class="footer">
         <p>&copy; UserFrosting Installer, 2014</p>

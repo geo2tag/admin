@@ -10,11 +10,11 @@
  *
  * Hybrid_Auth class provide a simple way to authenticate users via OpenID and OAuth.
  *
- * Generally, Hybrid_Auth is the only class you should instansiate and use throughout your application.
+ * Generally, Hybrid_Auth is the only class you should instanciate and use throughout your application.
  */
 class Hybrid_Auth
 {
-	public static $version = "2.4.0";
+	public static $version = "2.4.1";
 
 	public static $config  = array();
 
@@ -380,14 +380,17 @@ class Hybrid_Auth
 			return '';
 		}
 
+		$protocol = 'http://';
+
 		if(
-			isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1 )
-		|| 	isset( $_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'
+			(
+				isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1 )
+			) ||
+			(
+				isset( $_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'
+			)
 		){
 			$protocol = 'https://';
-		}
-		else {
-			$protocol = 'http://';
 		}
 
 		$url = $protocol . $_SERVER['HTTP_HOST'];

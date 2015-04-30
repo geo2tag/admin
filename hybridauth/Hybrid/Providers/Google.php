@@ -31,7 +31,7 @@ class Hybrid_Providers_Google extends Hybrid_Provider_Model_OAuth2
 		$this->api->token_info_url = "https://www.googleapis.com/oauth2/v2/tokeninfo";
 
 		// Google POST methods require an access_token in the header
-		$this->api->curl_header = array("Authorization: OAuth " . $this->access_token);
+		$this->api->curl_header = array("Authorization: OAuth " . $this->api->access_token);
 
 		// Override the redirect uri when it's set in the config parameters. This way we prevent
 		// redirect uri mismatches when authenticating with Google.
@@ -112,16 +112,18 @@ class Hybrid_Providers_Google extends Hybrid_Provider_Model_OAuth2
 					}
 				}
 			}
-            if (count($verified->emails) == 1) {
-                $this->user->profile->emailVerified = $verified->emails[0]->value;
-            } else {
-                foreach ($verified->emails as $email) {
-                    if ($email->type == 'account') {
-                        $this->user->profile->emailVerified = $email->value;
-                        break;
-                    }
-                }
-            }
+			if (property_exists($verified, 'emails')) {
+				if (count($verified->emails) == 1) {
+					$this->user->profile->emailVerified = $verified->emails[0]->value;
+				} else {
+					foreach ($verified->emails as $email) {
+						if ($email->type == 'account') {
+							$this->user->profile->emailVerified = $email->value;
+							break;
+						}
+					}
+				}
+			}
 		}
 		$this->user->profile->phone 		= (property_exists($response,'phone'))?$response->phone:"";
 		$this->user->profile->country 		= (property_exists($response,'country'))?$response->country:"";

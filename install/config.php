@@ -52,11 +52,15 @@ require_once("../models/secure_functions.php");
 defined("MENU_TEMPLATES")
     or define("MENU_TEMPLATES", dirname(__FILE__) . "/menu-templates/");
 
+defined("SESSION_NAME")
+    or define("SESSION_NAME", "UserFrosting");
+    
 // Construct default site path for inserting into the database
 $hostname = $_SERVER['HTTP_HOST'];
 $app_path = $_SERVER['PHP_SELF'];
 
 // Get the parent directory of this (the install) directory
+
 $app_dir_raw = dirname(dirname($app_path));
 
 // Replace backslashes in local root (if we're in a windows environment)
@@ -69,4 +73,5 @@ if ($app_dir == "/"){
 
 $url = $hostname . $app_dir . '/';
 
+session_name(SESSION_NAME);
 session_start();
