@@ -1139,6 +1139,53 @@ function fetchAllGroups() {
     }
 }
 
+//Fetch group details by group name
+//Added by Benjamin
+function fetchGroupDetailsByName($group_name) {
+    try {
+        global $db_table_prefix;
+
+        $db = pdoConnect();
+
+        $sqlVars = array();
+
+        $query = "SELECT
+            id,
+            name,
+            is_default,
+            can_delete,
+            home_page_id
+            FROM ".$db_table_prefix."groups
+            WHERE
+            name = :group_name
+            LIMIT 1";
+
+        $stmt = $db->prepare($query);
+
+        $sqlVars[':group_name'] = $group_name;
+
+        if (!$stmt->execute($sqlVars)){
+            // Error
+            return false;
+        }
+
+        if (!($results = $stmt->fetch(PDO::FETCH_ASSOC)))
+            return false;
+
+        $stmt = null;
+
+        return $results;
+
+    } catch (PDOException $e) {
+        addAlert("danger", "Oops, looks like our database encountered an error.");
+        error_log("Error in " . $e->getFile() . " on line " . $e->getLine() . ": " . $e->getMessage());
+        return false;
+    } catch (ErrorException $e) {
+        addAlert("danger", "Oops, looks like our server might have goofed.  If you're an admin, please check the PHP error logs.");
+        return false;
+    }
+}
+
 //Retrieve information for a group by id
 function fetchGroupDetails($group_id) {
     try {

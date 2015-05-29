@@ -33,7 +33,7 @@ require_once("../models/config.php");
 
 set_error_handler('logAllErrors');
 
-// Publically accessible API
+// Publicly accessible API
 
 // Request method: POST
 $ajax = checkRequestMode("post");

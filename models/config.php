@@ -88,7 +88,7 @@ $email_login = $settings['email_login'];
 $token_timeout = $settings['token_timeout'];
 $version = $settings['version'];
 
-// Check for upgrade, do this hear for access to $version
+// Check for upgrade, do this here for access to $version
 checkUpgrade($version, $dev_env);
 
 // Determine if this is SSL or unsecured connection
@@ -132,7 +132,7 @@ defined("LOG_AUTH_FAILURES")
 	or define("LOG_AUTH_FAILURES", false);
 
 defined("SESSION_NAME")
-    or define("SESSION_NAME", "UserFrosting");
+     or define("SESSION_NAME", "PHPSESSID");
 
 defined("SITE_TITLE")
     or define("SITE_TITLE", $websiteName);
@@ -187,6 +187,10 @@ require_once("authorization.php");
 require_once("secure_functions.php");
 require_once("class.mail.php");
 require_once("class.user.php");
+require_once("PHPRequestlibrary/Requests.php");
+// include HybridAuth library
+
+//require __DIR__ . "/../blog.php";
 
 //ChromePhp debugger for chrome console
 // http://craig.is/writing/chrome-logger

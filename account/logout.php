@@ -28,11 +28,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-
 require_once("../models/config.php");
+require_once("../hybridauth/Hybrid/Auth.php");
 
 // Request method: GET
 $ajax = checkRequestMode("get");
+$config = '../hybridauth/config.php';
+
 
 if (!securePage(__FILE__)){
     apiReturnError($ajax);
@@ -43,6 +45,11 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
 //Log the user out
 if(isUserLoggedIn())
 {
+    // initialize Hybrid_Auth class with the config file
+   $hybridauth = new Hybrid_Auth($config);
+    //Make HybridAuth forget that the user logged in with a provider
+    $hybridauth->logoutAllProviders();
+    //log out the user from our site
 	$loggedInUser->userLogOut();
 }
 

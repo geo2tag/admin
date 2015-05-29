@@ -84,7 +84,7 @@ if(!empty($_POST))
 		{
 			$userdetails = fetchUserAuthByUserName($username);
 			
-			//See if the user's account is activation
+			//See if the user's account is active
 			if($userdetails["active"]==1)
 			{
 				$errors[] = lang("ACCOUNT_ALREADY_ACTIVE");
