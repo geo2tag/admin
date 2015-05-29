@@ -29,22 +29,24 @@ THE SOFTWARE.
 
 */
 
-require_once("../models/config.php");
+require_once("../models/funcs.php");
 
-// Request method: GET
-$ajax = checkRequestMode("get");
-// User must be logged in
-if (!isUserLoggedIn()){
-  addAlert("danger", lang("LOGIN_REQUIRED"));
-  apiReturnError($ajax, SITE_ROOT . "login.php");
+defined("SESSION_NAME")
+    or define("SESSION_NAME", "UserFrosting");
+    
+session_name(SESSION_NAME);
+session_start();
 
+// Always a publically accessible script
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    addAlert($_POST['type'], $_POST['message']);
 }
 
-setReferralPage(getAbsoluteDocumentPath(__FILE__));
+if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+    echo json_encode($_SESSION["userAlerts"]);
+    
+    // Reset alerts after they have been delivered
+    $_SESSION["userAlerts"] = array();
+}
 
-// Automatically forward to the user's default home page
-$home_page = SITE_ROOT . fetchUserHomePage($loggedInUser->user_id);
-
-header( "Location: $home_page" ) ;
-exit();
 ?>
