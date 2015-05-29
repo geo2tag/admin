@@ -1,0 +1,21 @@
+﻿//Log in into Geo2tag server
+curl -d "{\"login\":\"??\",\"password\":\"??\"}" http://194.85.173.9:20005/service/login
+//Create two channels on the Geo2tag server
+curl -d "{\"auth_token\":\"??\", \"name\":\"Canal_1\", \"description\":\"Channel for testing the user management subsystem\", \"url\":\"http://login.geo2tag.org:20180\", \"activeRadius\":3000}"  http://194.85.173.9:20005/service/addChannel
+curl -d "{\"auth_token\":\"??\", \"name\":\"Canal_2\", \"description\":\"Channel for testing the user management subsystem\", \"url\":\"http://login.geo2tag.org:20180\", \"activeRadius\":3000}"  http://194.85.173.9:20005/service/addChannel
+
+//Log into the user and rights management subsystem 
+curl --data "login=??&password=??" http://login.geo2tag.org:20180/service/login.php
+
+//Subscribe to the channels
+curl --data "auth_token=??&channel=Canal_1" http://login.geo2tag.org:20180/service/subscribe.php
+curl --data "auth_token=??&channel=Canal_2" http://login.geo2tag.org:20180/service/subscribe.php
+
+//Filter the channels
+curl --data "auth_token=??&channel=Canal_1&amount=100" http://login.geo2tag.org:20180/service/filterChannel.php
+curl --data "auth_token=??&channel=Canal_2&amount=100" http://login.geo2tag.org:20180/service/filterChannel.php
+
+//Write tags to the channels
+curl --data "auth_token=??&channel=Canal_1&description=tag to test the user and rights management subsystem&latitude=60.0&altitude=30.0&link=unknown&longitude=30.0&time=29 05 2015 06:36:40.630&title= user management tag" http://login.geo2tag.org:20180/service/writeTag.php
+curl --data "auth_token=??&channel=Canal_2&description=tag to test the user and rights management subsystem&latitude=60.0&altitude=30.0&link=unknown&longitude=30.0&time=29 05 2015 06:36:40.630&title= user management tag" http://login.geo2tag.org:20180/service/writeTag.php
+

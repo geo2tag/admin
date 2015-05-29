@@ -166,6 +166,8 @@ CREATE TABLE IF NOT EXISTS `".$db_table_prefix."users` (
 `title` varchar(150) NOT NULL,
 `sign_up_stamp` int(11) NOT NULL,
 `last_sign_in_stamp` int(11) NOT NULL,
+`geo2tag_oauth_time_stamp` int(11) NOT NULL,
+`geo2tag_oauth_token` varchar(255) NOT NULL,
 `hybridauth_provider_name` VARCHAR(255) NOT NULL COMMENT 'Provider name',
 `hybridauth_provider_uid` VARCHAR(255) NOT NULL COMMENT 'Provider user ID',
 `enabled` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Specifies if the account is enabled.  Disabled accounts cannot be logged in to, but they retain all of their data and settings.',

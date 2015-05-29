@@ -37,7 +37,7 @@ if (count($validator->errors) > 0){
 
 // Check to see if this should be a binary or string value, update accordingly
 if ($results = checkBinaryConfig($name)){
-    // Assume binary data type, hack to simply change to new value rather then using value
+    // Assume binary data type, hack to simply change to new value rather than using value
     if ($results[1] == 1){
         if (updateSitePluginSettings($name, 0)){
             $successes[] = lang("CONFIG_UPDATE_SUCCESSFUL");

@@ -57,7 +57,7 @@ if (isset($_REQUEST["provider"])) {
     // the selected provider
     $provider_name = $_REQUEST["provider"];
 
-   // $config = '/hybridauth/config.php';
+    // $config = '/hybridauth/config.php';
     $config = dirname(__FILE__) . '/hybridauth/config.php';
     require_once("hybridauth/Hybrid/Auth.php");
     try {
@@ -162,14 +162,14 @@ if (isset($_REQUEST["provider"])) {
                 apiReturnError(false, SITE_ROOT . "login.php");
             } catch (ErrorException $e) {
                 addAlert("danger", "Oops, looks like our server might have goofed.  If you're an admin, please check the PHP error logs.");
-               apiReturnError(false, SITE_ROOT . "login.php");
+                apiReturnError(false, SITE_ROOT . "login.php");
             }
 
-             //The new user's id
+            //The new user's id
             $new_user_id = $inserted_id;
 
             //Add user to the default group
-            if (dbAddUserToDefaultGroups($new_user_id)){
+            if (dbAddUserToDefaultGroups($new_user_id)) {
             } else {
                 apiReturnError(false, SITE_ROOT . "login.php");
             }

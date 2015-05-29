@@ -187,6 +187,7 @@ require_once("authorization.php");
 require_once("secure_functions.php");
 require_once("class.mail.php");
 require_once("class.user.php");
+require_once("PHPRequestlibrary/Requests.php");
 // include HybridAuth library
 
 //require __DIR__ . "/../blog.php";
